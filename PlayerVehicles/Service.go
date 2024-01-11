@@ -1,7 +1,7 @@
 package PlayerVehicles
 
 import (
-	wgapi "github.com/Thenecromance/WarGamingAPI"
+	wgapi "github.com/Thenecromance/WGAPI"
 )
 
 /* type Service struct {

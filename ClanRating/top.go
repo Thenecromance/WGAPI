@@ -3,8 +3,8 @@ package ClanRating
 import (
 	"encoding/json"
 
-	wgapi "github.com/Thenecromance/WarGamingAPI"
-	structure "github.com/Thenecromance/WarGamingAPI/ClanRating/structure/top"
+	wgapi "github.com/Thenecromance/WGAPI"
+	structure "github.com/Thenecromance/WGAPI/ClanRating/structure/top"
 )
 
 type topResponse struct {

@@ -3,7 +3,7 @@ package Tankopedia
 import (
 	"encoding/json"
 
-	wgapi "github.com/Thenecromance/WarGamingAPI"
+	wgapi "github.com/Thenecromance/WGAPI"
 )
 
 type Map struct {

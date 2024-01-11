@@ -3,8 +3,8 @@ package Tankopedia
 import (
 	"encoding/json"
 
-	wgapi "github.com/Thenecromance/WarGamingAPI"
-	structure "github.com/Thenecromance/WarGamingAPI/Tankopedia/structure/vehicleprofile"
+	wgapi "github.com/Thenecromance/WGAPI"
+	structure "github.com/Thenecromance/WGAPI/Tankopedia/structure/vehicleprofile"
 )
 
 type VpData map[string]structure.Vehicleprofile

@@ -1,13 +1,13 @@
 package Clans
 
-import wgapi "github.com/Thenecromance/WarGamingAPI"
+import wgapi "github.com/Thenecromance/WGAPI"
 
 // import (
 // 	"encoding/json"
 
-// 	wgapi "github.com/Thenecromance/WarGamingAPI"
-// 	"github.com/Thenecromance/WarGamingAPI/RequestProcessor"
-// 	structure "github.com/Thenecromance/WarGamingAPI/Service/Clans/structure/Clans"
+// 	wgapi "github.com/Thenecromance/WGAPI"
+// 	"github.com/Thenecromance/WGAPI/RequestProcessor"
+// 	structure "github.com/Thenecromance/WGAPI/Service/Clans/structure/Clans"
 // )
 
 // var (

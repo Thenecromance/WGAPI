@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	wgapi "github.com/Thenecromance/WarGamingAPI"
-	structure "github.com/Thenecromance/WarGamingAPI/Account/structure/info"
+	wgapi "github.com/Thenecromance/WGAPI"
+	structure "github.com/Thenecromance/WGAPI/Account/structure/info"
 )
 
 type timestamp = int64

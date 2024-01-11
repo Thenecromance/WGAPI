@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	wgapi "github.com/Thenecromance/WarGamingAPI"
+	wgapi "github.com/Thenecromance/WGAPI"
 )
 
 type Player struct {

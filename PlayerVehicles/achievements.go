@@ -3,8 +3,8 @@ package PlayerVehicles
 import (
 	"encoding/json"
 
-	wgapi "github.com/Thenecromance/WarGamingAPI"
-	structure "github.com/Thenecromance/WarGamingAPI/Service/PlayerVehicles/structure/achievements"
+	wgapi "github.com/Thenecromance/WGAPI"
+	structure "github.com/Thenecromance/WGAPI/PlayerVehicles/structure/achievements"
 )
 
 // type Data map[string]interface{}

@@ -3,7 +3,7 @@ package Clans
 import (
 	"encoding/json"
 
-	wgapi "github.com/Thenecromance/WarGamingAPI"
+	wgapi "github.com/Thenecromance/WGAPI"
 )
 
 type Data map[string]interface{}

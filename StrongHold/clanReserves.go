@@ -3,8 +3,8 @@ package StrongHold
 import (
 	"encoding/json"
 
-	wgapi "github.com/Thenecromance/WarGamingAPI"
-	structure "github.com/Thenecromance/WarGamingAPI/StrongHold/structure/clanreserves"
+	wgapi "github.com/Thenecromance/WGAPI"
+	structure "github.com/Thenecromance/WGAPI/StrongHold/structure/clanreserves"
 )
 
 type clanReservesResponse struct {

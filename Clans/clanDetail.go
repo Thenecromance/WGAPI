@@ -3,9 +3,9 @@ package Clans
 import (
 	"encoding/json"
 
-	wgapi "github.com/Thenecromance/WarGamingAPI"
+	wgapi "github.com/Thenecromance/WGAPI"
 
-	structure "github.com/Thenecromance/WarGamingAPI/Clans/structure/ClanDetails"
+	structure "github.com/Thenecromance/WGAPI/Clans/structure/ClanDetails"
 )
 
 type timestamp = int64

@@ -3,8 +3,8 @@ package PlayerVehicles
 import (
 	"encoding/json"
 
-	wgapi "github.com/Thenecromance/WarGamingAPI"
-	structure "github.com/Thenecromance/WarGamingAPI/PlayerVehicles/structure/stats"
+	wgapi "github.com/Thenecromance/WGAPI"
+	structure "github.com/Thenecromance/WGAPI/PlayerVehicles/structure/stats"
 )
 
 type statsData map[string]structure.Stats
