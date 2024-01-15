@@ -13,8 +13,32 @@ type vehiclesResponse struct {
 	Data Data `json:"data"`
 }
 
-func Vehicles(tank_id string) map[string]structure.Vehicles {
+func Vehicles(tank_id string) structure.Vehicles {
 	request, err := wgapi.Request(buildPath(vehicles), map[string]string{"tank_id": tank_id})
+	if err != nil {
+
+		if wgapi.Logger != nil {
+			wgapi.Logger.Error(err)
+		}
+
+		return structure.Vehicles{}
+	}
+
+	//parse the json
+	resp := &vehiclesResponse{}
+	jsonErr := json.Unmarshal(request, resp)
+	if jsonErr != nil {
+		wgapi.Logger.Error(jsonErr)
+		return structure.Vehicles{}
+	}
+	return resp.Data[tank_id]
+}
+
+func AllVehicles() map[string]structure.Vehicles {
+	request, err := wgapi.Request(buildPath(vehicles), map[string]string{
+		"language":"zh-tw",
+		
+	})
 	if err != nil {
 
 		if wgapi.Logger != nil {
@@ -23,7 +47,6 @@ func Vehicles(tank_id string) map[string]structure.Vehicles {
 
 		return nil
 	}
-
 	//parse the json
 	resp := &vehiclesResponse{}
 	jsonErr := json.Unmarshal(request, resp)

@@ -1,7 +1,7 @@
 package wgapi
 
 const (
-	Host = "https://api.worldoftanks."
+	Host = "https://api.worldoftanks.asia"
 )
 
 var Logger ILogger = &defaultLogger{}
@@ -17,6 +17,7 @@ type IHttpClient interface {
 	Request(url string, params map[string]string) ([]byte, error)
 }
 
+// create a empty struct to implement the logger interface
 type defaultLogger struct {
 }
 

@@ -16,8 +16,11 @@ func (this *client) Request(url string, params map[string]string) ([]byte, error
 	//if find {
 	//	return resp, nil
 	//}
+	if params == nil {
+		params = make(map[string]string)
+	}
 
-	params["application_id"] = "c02d05ea55d29361b5e7ec9e51d3e60a"
+	params["application_id"] = token
 
 	// if service could not find the info  on local storage,then start to request from remote
 	resp, find := this.requestFromRemote(url, params)

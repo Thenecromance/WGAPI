@@ -17,7 +17,7 @@ type informationResponse struct {
 }
 
 func Information() structure.Info {
-	request, err := wgapi.Request(buildPath(info), map[string]string{"language": "zh-cn"})
+	response, err := wgapi.Request(buildPath(info), map[string]string{"language": "zh-cn"})
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return structure.Info{}
@@ -25,7 +25,8 @@ func Information() structure.Info {
 
 	//parse the json
 	resp := &informationResponse{}
-	jsonErr := json.Unmarshal(request, resp)
+	jsonErr := json.Unmarshal(response, resp)
+	wgapi.Logger.Debugf("%s", resp.Status)
 	if jsonErr != nil {
 		wgapi.Logger.Error(jsonErr)
 		return structure.Info{}

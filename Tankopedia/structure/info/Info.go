@@ -13,5 +13,5 @@ type Info struct {
 
 	VehicleTypes map[string]string/*associative array*/ `json:"vehicle_types" xml:"vehicle_types" ` // Available vehicle types
 
-	AchievementSections *AchievementSections `json:"achievement_sections" xml:"achievement_sections" ` // Award sections
+	AchievementSections map[string]AchievementSections `json:"achievement_sections" xml:"achievement_sections" ` // Award sections
 }

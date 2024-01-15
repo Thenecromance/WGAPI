@@ -7,10 +7,9 @@ import (
 	structure "github.com/Thenecromance/WGAPI/Tankopedia/structure/vehicleprofile"
 )
 
-type VpData map[string]structure.Vehicleprofile
 type vehicleProfileResponse struct {
 	wgapi.ResponseBase
-	Data VpData `json:"data"`
+	Data map[string]structure.Vehicleprofile `json:"data"`
 }
 
 func VehicleCharacteristics(tank_id string) structure.Vehicleprofile {
