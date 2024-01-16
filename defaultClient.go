@@ -26,18 +26,11 @@ func (this *client) Request(url string, params map[string]string) ([]byte, error
 	resp, find := this.requestFromRemote(url, params)
 	if find {
 		//save the info to local machine
-		this.syncToLocal()
 		return resp, nil
 	}
 
 	return nil, errors.New("Request Error!")
 
-}
-
-func (this *client) requestFromLocal(url string, params map[string]string) ([]byte, bool) {
-	//request data from the local storage or from our database
-	//logger.GetSugaredLogger().Warnf("requestFromLocal not implement yet!")
-	return nil, false
 }
 
 func (this *client) requestFromRemote(url string, params map[string]string) ([]byte, bool) {
@@ -48,7 +41,7 @@ func (this *client) requestFromRemote(url string, params map[string]string) ([]b
 		}
 	}
 	Logger.Debugf("Request URL: %s", url)
-	req, _ := http.NewRequest("GET", url, nil)
+	req, _ := http.NewRequest("POST", url, nil)
 
 	//set up header
 	{
@@ -56,21 +49,18 @@ func (this *client) requestFromRemote(url string, params map[string]string) ([]b
 	}
 	response, err := http.DefaultClient.Do(req)
 	if err != nil {
-		Logger.Errorf("Request Error: %s", err.Error())
+		Logger.Errorf("Request failed with error: %s", err.Error())
 		return nil, false
 	}
+
 	defer func(Body io.ReadCloser) {
 		err := Body.Close()
 		if err != nil {
-			Logger.Errorf("Request Error: %s", err.Error())
+			Logger.Errorf("failed to close response stream: %s", err.Error())
 		}
 	}(response.Body)
 
 	//read the response
 	body, _ := io.ReadAll(response.Body)
 	return body, true
-}
-
-func (this *client) syncToLocal() {
-	//logger.GetSugaredLogger().Warnf("syncToLocal not implement yet!")
 }
