@@ -17,8 +17,14 @@ type crewskillsResponse struct {
 	Data map[string]structure.Crewskills `json:"data"`
 }
 
-func CrewSkills() map[string]structure.Crewskills {
-	request, err := wgapi.Request(buildPath(crewskills), map[string]string{"language": "zh-cn"})
+func CrewSkills(opts ...wgapi.ParamOption) map[string]structure.Crewskills {
+
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(crewskills)),
+	)
+	request, err := wgapi.Request(opts...)
+
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

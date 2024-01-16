@@ -12,8 +12,14 @@ type clanReservesResponse struct {
 	Data []structure.Clanreserves `json:"data"`
 }
 
-func ClanReserves(access_token string) []structure.Clanreserves {
-	request, err := wgapi.Request(buildPath(clanreserves), map[string]string{"access_token": access_token})
+func ClanReserves(access_token string, opts ...wgapi.ParamOption) []structure.Clanreserves {
+
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("access_token", access_token),
+		wgapi.WithPath(buildPath(clanreserves)),
+	)
+	request, err := wgapi.Request(opts...)
+
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

@@ -18,8 +18,12 @@ type mapResponse struct {
 	Data map[string]Map `json:"data"`
 }
 
-func Arenas() map[string]Map {
-	request, err := wgapi.Request(buildPath(arenas), map[string]string{"language": "zh-cn"})
+func Arenas(opts ...wgapi.ParamOption) map[string]Map {
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(arenas)),
+	)
+	request, err := wgapi.Request(opts...)
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

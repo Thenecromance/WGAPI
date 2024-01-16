@@ -23,20 +23,24 @@ type PlayerDetail struct {
 	structure.Statistics `json:"statistics" binding:"required"`
 	*structure.Private   `json:"private" `
 }
-
 type Data map[string]PlayerDetail
-
 type detailResponse struct {
 	wgapi.ResponseBase
 	Data Data `json:"data" `
 }
 
-func PersonalData(accountIds string) (results []PlayerDetail) {
+func PersonalData(accountIds string, opts ...wgapi.ParamOption) (results []PlayerDetail) {
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("account_id", accountIds),
+		wgapi.WithPath(buildPath(personal_data)),
+	)
 
-	request, err := wgapi.Request(buildPath(personal_data), map[string]string{"account_id": accountIds})
+	request, err := wgapi.Request(opts...)
+
 	if err != nil {
 		return nil
 	}
+
 	resp := &detailResponse{}
 	json_err := json.Unmarshal(request, resp)
 	if json_err != nil {

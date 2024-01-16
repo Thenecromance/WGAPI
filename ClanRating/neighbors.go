@@ -11,8 +11,14 @@ type neighborsResponse struct {
 	Data []ClanRating `json:"data"`
 }
 
-func Neighbors(clan_id string, rank_field string) []ClanRating {
-	request, err := wgapi.Request(buildPath(neighbors), map[string]string{"clan_id": clan_id, "rank_field": rank_field, "language": "zh-cn"})
+func Neighbors(clanId string, rankField string, opts ...wgapi.ParamOption) []ClanRating {
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("clan_id", clanId),
+		wgapi.WithParam("rank_field", rankField),
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(neighbors)),
+	)
+	request, err := wgapi.Request(opts...)
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

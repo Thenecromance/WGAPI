@@ -12,8 +12,13 @@ type clanGlossaryResponse struct {
 	Data Data `json:"data"`
 }
 
-func Glossary() map[string]string {
-	request, err := wgapi.Request(buildPath(glossary), map[string]string{"language": "zh-cn"})
+func Glossary(opts ...wgapi.ParamOption) map[string]string {
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(glossary)),
+	)
+	request, err := wgapi.Request(opts...)
+
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

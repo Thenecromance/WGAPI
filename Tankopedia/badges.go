@@ -12,8 +12,12 @@ type badgesResponse struct {
 	Data map[string]structure.Badges `json:"data"`
 }
 
-func Badges() map[string]structure.Badges {
-	request, err := wgapi.Request(buildPath(badges), map[string]string{"language": "zh-cn"})
+func Badges(opts ...wgapi.ParamOption) map[string]structure.Badges {
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(badges)),
+	)
+	request, err := wgapi.Request(opts...)
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

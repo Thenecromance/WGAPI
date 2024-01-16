@@ -12,8 +12,15 @@ type topResponse struct {
 	Data []structure.Top `json:"data"`
 }
 
-func Top(rank_field string) []structure.Top {
-	request, err := wgapi.Request(buildPath(top), map[string]string{"rank_field": rank_field, "language": "zh-cn", "limit": "100"})
+func Top(rank_field string, opts ...wgapi.ParamOption) []structure.Top {
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("rank_field", rank_field),
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithParam("limit", "100"),
+		wgapi.WithPath(buildPath(top)),
+	)
+	request, err := wgapi.Request(opts...)
+	
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

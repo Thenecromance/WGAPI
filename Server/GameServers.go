@@ -17,8 +17,14 @@ type achievementsResponse struct {
 	Data map[string][]ServerStatus `json:"data"`
 }
 
-func GameServers() map[string][]ServerStatus {
-	request, err := wgapi.Request(buildPath(info), map[string]string{"language": "zh-cn"})
+func GameServers(opts ...wgapi.ParamOption) map[string][]ServerStatus {
+
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(info)),
+	)
+	request, err := wgapi.Request(opts...)
+	
 	if err != nil {
 		fmt.Println(err)
 		wgapi.Logger.Error(err)

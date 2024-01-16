@@ -24,8 +24,13 @@ type provisionsResponse struct {
 	Data map[string]structure.Provisions `json:"data"`
 }
 
-func Provisions() map[string]structure.Provisions {
-	request, err := wgapi.Request(buildPath(provisions), map[string]string{"language": "zh-cn"})
+func Provisions(opts ...wgapi.ParamOption) map[string]structure.Provisions {
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(provisions)),
+	)
+	request, err := wgapi.Request(opts...)
+	
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

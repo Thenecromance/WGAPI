@@ -41,8 +41,14 @@ type ClanDetailResponse struct {
 	Data ClanDetails `json:"data"`
 }
 
-func ClanDetail(clanId string) map[string]structure.Clandetails {
-	request, err := wgapi.Request(buildPath(clan_detail), map[string]string{"clan_id": clanId, "language": "zh-cn"})
+func ClanDetail(clanId string, opts ...wgapi.ParamOption) map[string]structure.Clandetails {
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("clan_id", clanId),
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(clan_detail)),
+	)
+	request, err := wgapi.Request(opts...)
+	
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

@@ -11,15 +11,18 @@ type activeClanReservesResponse struct {
 	ActivatedAt string `json:"data"`
 }
 
-func ActiveClanReserves(access_token string, reserve_level string, reserve_type string) string {
+func ActiveClanReserves(access_token string, reserve_level string, reserve_type string, opts ...wgapi.ParamOption) string {
 
 	panic("Don't have time to implement this")
-	request, err := wgapi.Request(buildPath(activateclanreserve), map[string]string{
-		"access_token":  access_token,
-		"reserve_level": reserve_level,
-		"reserve_type":  reserve_type,
-	})
 
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("access_token", access_token),
+		wgapi.WithParam("reserve_level", reserve_level),
+		wgapi.WithParam("reserve_type", reserve_type),
+		wgapi.WithPath(buildPath(activateclanreserve)),
+	)
+	request, err := wgapi.Request(opts...)
+	
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return ""

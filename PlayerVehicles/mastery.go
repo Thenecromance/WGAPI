@@ -17,8 +17,16 @@ type masteryResponse struct {
 	Data structure.Mastery `json:"data"`
 }
 
-func MasteryDatas(distribution string, percentile string) structure.Mastery {
-	request, err := wgapi.Request(buildPath(mastery), map[string]string{"distribution": distribution, "percentile": percentile, "language": "zh-cn"})
+func MasteryDatas(distribution string, percentile string, opts ...wgapi.ParamOption) structure.Mastery {
+
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("distribution", distribution),
+		wgapi.WithParam("percentile", percentile),
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(mastery)),
+	)
+	request, err := wgapi.Request(opts...)
+
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return structure.Mastery{}

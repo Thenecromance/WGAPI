@@ -1,8 +1,6 @@
 package Account
 
-import (
-	wgapi "github.com/Thenecromance/WGAPI"
-)
+import wgapi "github.com/Thenecromance/WGAPI"
 
 const (
 	path = "wot/account"

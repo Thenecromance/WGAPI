@@ -15,8 +15,14 @@ type achivementResponse struct {
 	Data Data `json:"data"`
 }
 
-func Achievements(account_id string) map[string][]structure.Achievements {
-	request, err := wgapi.Request(buildPath(achievements), map[string]string{"account_id": account_id, "language": "zh-cn"})
+func Achievements(account_id string, opts ...wgapi.ParamOption) map[string][]structure.Achievements {
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("account_id", account_id),
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(achievements)),
+	)
+	request, err := wgapi.Request(opts...)
+
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

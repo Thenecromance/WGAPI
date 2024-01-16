@@ -26,9 +26,13 @@ type playerVehiclesResponse struct {
 	VehData `json:"data"`
 }
 
-func /* (this *Service) */ PlayerVehicles(accountIds string) []PlayerDetail {
+func /* (this *Service) */ PlayerVehicles(accountIds string, opts ...wgapi.ParamOption) []PlayerDetail {
 
-	request, err := wgapi.Request(buildPath(vehicles) /* +this.methodPath["vehicles"] */, map[string]string{"account_id": accountIds})
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("account_id", accountIds),
+		wgapi.WithPath(buildPath(vehicles)),
+	)
+	request, err := wgapi.Request(opts...)
 	if err != nil {
 		return nil
 	}

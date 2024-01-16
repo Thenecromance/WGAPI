@@ -14,8 +14,12 @@ type achievementsResponse struct {
 	Data AData `json:"data"`
 }
 
-func Achievements() map[string]structure.Achievements {
-	request, err := wgapi.Request(buildPath(achievements), map[string]string{"language": "zh-cn"})
+func Achievements(opts ...wgapi.ParamOption) map[string]structure.Achievements {
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(achievements)),
+	)
+	request, err := wgapi.Request(opts...)
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

@@ -17,8 +17,12 @@ type boostersResponse struct {
 	Data map[string]structure.Boosters `json:"data"`
 }
 
-func Boosters() map[string]structure.Boosters {
-	request, err := wgapi.Request(buildPath(boosters), map[string]string{"language": "zh-cn"})
+func Boosters(opts ...wgapi.ParamOption) map[string]structure.Boosters {
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(boosters)),
+	)
+	request, err := wgapi.Request(opts...)
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

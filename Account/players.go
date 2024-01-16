@@ -17,8 +17,11 @@ type responsePlayer struct {
 	Data []Player `json:"data"`
 }
 
-func /*  (this *Service) */ Players(name string) (ret []Player) {
-	request, err := wgapi.Request(buildPath(players) /* +this.methodPath["players"] */, map[string]string{"search": name})
+func /*  (this *Service) */ Players(name string, opts ...wgapi.ParamOption) (ret []Player) {
+	wgapi.InsertBefore(opts, wgapi.WithParam("search", name), wgapi.WithPath(buildPath(players)))
+
+	request, err := wgapi.Request(opts...)
+
 	if err != nil {
 		return nil
 	}

@@ -12,8 +12,12 @@ type DatesWithAvailableRatingsResponse struct {
 	Data map[string]structure.DatesWithAvailableRatings `json:"data"`
 }
 
-func DatesWithAvailableRatings() structure.DatesWithAvailableRatings {
-	request, err := wgapi.Request(buildPath(dates), map[string]string{"language": "zh-cn"})
+func DatesWithAvailableRatings(opts ...wgapi.ParamOption) structure.DatesWithAvailableRatings {
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(dates)),
+	)
+	request, err := wgapi.Request(opts...)
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return structure.DatesWithAvailableRatings{}

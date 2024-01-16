@@ -20,8 +20,14 @@ type vehicleprofilesResponse struct {
 	Data map[string][]structure.Vehicleprofiles `json:"data"`
 }
 
-func VehicleProfiles(tank_id string) map[string][]structure.Vehicleprofiles {
-	request, err := wgapi.Request(buildPath(vehicleprofiles), map[string]string{"tank_id": tank_id})
+func VehicleProfiles(tank_id string, opts ...wgapi.ParamOption) map[string][]structure.Vehicleprofiles {
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithParam("tank_id", tank_id),
+		wgapi.WithPath(buildPath(vehicleprofiles)),
+	)
+	request, err := wgapi.Request(opts...)
+
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

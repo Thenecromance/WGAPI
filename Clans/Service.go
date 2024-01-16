@@ -1,6 +1,8 @@
 package Clans
 
-import wgapi "github.com/Thenecromance/WGAPI"
+import (
+	wgapi "github.com/Thenecromance/WGAPI"
+)
 
 // import (
 // 	"encoding/json"

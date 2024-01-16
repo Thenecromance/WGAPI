@@ -12,8 +12,16 @@ type modulesResponse struct {
 	Data map[string]structure.Modules `json:"data"`
 }
 
-func Modules() map[string]structure.Modules {
-	request, err := wgapi.Request(buildPath(modules), map[string]string{"extra": "default_profile", "fields": "default_profile.engine"})
+func Modules(opts ...wgapi.ParamOption) map[string]structure.Modules {
+
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("extra", "default_profile"),
+		wgapi.WithParam("fields", "default_profile.engine"),
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(info)),
+	)
+	request, err := wgapi.Request(opts...)
+
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

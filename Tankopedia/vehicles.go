@@ -13,8 +13,17 @@ type vehiclesResponse struct {
 	Data Data `json:"data"`
 }
 
-func Vehicles(tank_id string) structure.Vehicles {
-	request, err := wgapi.Request(buildPath(vehicles), map[string]string{"tank_id": tank_id})
+// TODO: something goes wrong here , seems like parse failed
+func Vehicles(tank_id string, opts ...wgapi.ParamOption) structure.Vehicles {
+
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("tank_id", tank_id),
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(vehicles)),
+	)
+	request, err := wgapi.Request(opts...)
+
+	//request, err := wgapi.Request(buildPath(param.GetRegion(), vehicles), map[string]string{"tank_id": tank_id})
 	if err != nil {
 
 		if wgapi.Logger != nil {
@@ -34,10 +43,10 @@ func Vehicles(tank_id string) structure.Vehicles {
 	return resp.Data[tank_id]
 }
 
+/*
 func AllVehicles() map[string]structure.Vehicles {
-	request, err := wgapi.Request(buildPath(vehicles), map[string]string{
-		"language":"zh-tw",
-		
+	request, err := wgapi.Request(buildPath(param.GetRegion(), vehicles), map[string]string{
+		"language": "zh-tw",
 	})
 	if err != nil {
 
@@ -56,3 +65,4 @@ func AllVehicles() map[string]structure.Vehicles {
 	}
 	return resp.Data
 }
+*/

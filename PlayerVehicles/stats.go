@@ -13,8 +13,15 @@ type StatsRatingsResponse struct {
 	Data statsData `json:"data"`
 }
 
-func Stats(account_id string) structure.Stats {
-	request, err := wgapi.Request(buildPath(stats), map[string]string{"account_id": account_id, "language": "zh-cn"})
+func Stats(account_id string, opts ...wgapi.ParamOption) structure.Stats {
+
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("account_id", account_id),
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(stats)),
+	)
+	request, err := wgapi.Request(opts...)
+
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return structure.Stats{}

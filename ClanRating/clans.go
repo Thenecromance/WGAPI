@@ -57,8 +57,13 @@ type clanRatingsResponse struct {
 	Data map[string]ClanRating `json:"data"`
 }
 
-func ClanRatings(clan_id string) map[string]ClanRating {
-	request, err := wgapi.Request(buildPath(clans), map[string]string{"clan_id": clan_id, "language": "zh-cn"})
+func ClanRatings(clan_id string, opts ...wgapi.ParamOption) map[string]ClanRating {
+	wgapi.InsertBefore(opts,
+		wgapi.WithParam("clan_id", clan_id),
+		wgapi.WithParam("language", "zh-cn"),
+		wgapi.WithPath(buildPath(clans)),
+	)
+	request, err := wgapi.Request(opts...)
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil
