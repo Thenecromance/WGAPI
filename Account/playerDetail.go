@@ -30,10 +30,7 @@ type detailResponse struct {
 }
 
 func PersonalData(accountIds string, opts ...wgapi.ParamOption) (results []PlayerDetail) {
-	wgapi.InsertBefore(opts,
-		wgapi.WithParam("account_id", accountIds),
-		wgapi.WithPath(buildPath(personal_data)),
-	)
+	opts = append(opts, wgapi.WithParam("account_id", accountIds), wgapi.WithPath(buildPath(personal_data)))
 
 	request, err := wgapi.Request(opts...)
 
