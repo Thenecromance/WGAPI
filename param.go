@@ -4,25 +4,31 @@ type ParamOption interface {
 	apply(*paramOption)
 }
 
+// paramOption contains all basic info for a request
 type paramOption struct {
-	path   string
+	// only accept GET or POST so far, this will decide use which way when request to remote
+	method string
+	// the path of the request
+	path string
+	// the region of the request
 	region string
-	args   map[string]string
+	// the params of the request
+	args map[string]string
+}
+
+type asyncOption struct {
+	unMarshal func([]byte, error) (any, error)
 }
 
 type Param struct {
 	popts paramOption
+	async asyncOption
 }
 
-func (p *Param) GetRegion() string {
-	return p.popts.region
-}
-func (p *Param) GetParam() map[string]string {
-	return p.popts.args
-}
-
+// params default values
 func defaultParamOption() paramOption {
 	return paramOption{
+		method: "GET",
 		path:   Host,
 		region: "asia",
 		args: map[string]string{
@@ -31,6 +37,17 @@ func defaultParamOption() paramOption {
 	}
 }
 
+// returns the region of the request
+func (p *Param) GetRegion() string {
+	return p.popts.region
+}
+
+// returns the params of the request
+func (p *Param) GetParam() map[string]string {
+	return p.popts.args
+}
+
+// param Setter
 type FuncParam struct {
 	F func(*paramOption)
 }

@@ -9,7 +9,7 @@ import (
 type client struct {
 }
 
-func (this *client) Request(url string, params map[string]string) ([]byte, error) {
+func (this *client) Request(method string, url string, params map[string]string) ([]byte, error) {
 
 	//// first try to get the request from local
 	//resp, find := this.requestFromLocal(url, params)
@@ -23,7 +23,7 @@ func (this *client) Request(url string, params map[string]string) ([]byte, error
 	params["application_id"] = token
 
 	// if service could not find the info  on local storage,then start to request from remote
-	resp, find := this.requestFromRemote(url, params)
+	resp, find := this.requestFromRemote(method, url, params)
 	if find {
 		//save the info to local machine
 		return resp, nil
@@ -33,7 +33,7 @@ func (this *client) Request(url string, params map[string]string) ([]byte, error
 
 }
 
-func (this *client) requestFromRemote(url string, params map[string]string) ([]byte, bool) {
+func (this *client) requestFromRemote(method string, url string, params map[string]string) ([]byte, bool) {
 	url += "/?"
 	for k, v := range params {
 		if v != "" {
@@ -41,7 +41,7 @@ func (this *client) requestFromRemote(url string, params map[string]string) ([]b
 		}
 	}
 	Logger.Debugf("Request URL: %s", url)
-	req, _ := http.NewRequest("POST", url, nil)
+	req, _ := http.NewRequest(method, url, nil)
 
 	//set up header
 	{

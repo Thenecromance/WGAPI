@@ -2,8 +2,6 @@ package wargaming
 
 import (
 	"encoding/json"
-	"fmt"
-
 	wgapi "github.com/Thenecromance/WGAPI"
 )
 
@@ -19,14 +17,14 @@ type achievementsResponse struct {
 
 func GameServers(opts ...wgapi.ParamOption) map[string][]ServerStatus {
 
-	/*opts =*/ wgapi.InsertBefore(&opts,
+	/*opts =*/
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithPath(buildPath(info)),
 	)
 	request, err := wgapi.Request(opts...)
 
 	if err != nil {
-		fmt.Println(err)
 		wgapi.Logger.Error(err)
 		return nil
 	}
@@ -35,7 +33,6 @@ func GameServers(opts ...wgapi.ParamOption) map[string][]ServerStatus {
 	resp := &achievementsResponse{}
 	jsonErr := json.Unmarshal(request, resp)
 	if jsonErr != nil {
-		fmt.Println(jsonErr)
 		wgapi.Logger.Error(jsonErr)
 		return nil
 	}

@@ -18,18 +18,33 @@ type ILogger interface {
 }
 
 type IHttpClient interface {
-	Request(url string, params map[string]string) ([]byte, error)
+	Request(method string, url string, params map[string]string) ([]byte, error)
 }
 
 func applyRegion(param *Param) {
 	param.popts.path = strings.Replace(param.popts.path, "*", param.popts.region, 1)
 }
 
+var Async bool = false
+
+type callback func([]byte, error)
+
 // for API usage only
 func Request(opts ...ParamOption) ([]byte, error) {
 	param := newParam(opts...)
 	applyRegion(param)
-	return Client.Request(param.popts.path, param.popts.args)
+
+	if Async {
+
+		callback := func(data []byte, err error) {
+
+		}
+		callback(Client.Request(param.popts.method, param.popts.path, param.popts.args))
+		return nil, nil
+	} else {
+		return Client.Request(param.popts.method, param.popts.path, param.popts.args)
+	}
+
 }
 
 func SetLogger(logger ILogger) {
