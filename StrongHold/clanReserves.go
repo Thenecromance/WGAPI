@@ -14,7 +14,7 @@ type clanReservesResponse struct {
 
 func ClanReserves(access_token string, opts ...wgapi.ParamOption) []structure.Clanreserves {
 
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("access_token", access_token),
 		wgapi.WithPath(buildPath(clanreserves)),
 	)

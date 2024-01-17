@@ -17,12 +17,12 @@ type rankFieldsResponse struct {
 }
 
 func TypeOfRatings(opts ...wgapi.ParamOption) RankFields {
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithPath(buildPath(types)),
 	)
 	request, err := wgapi.Request(opts...)
-	
+
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return RankFields{}

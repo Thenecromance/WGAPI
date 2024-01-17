@@ -19,7 +19,7 @@ type crewskillsResponse struct {
 
 func CrewSkills(opts ...wgapi.ParamOption) map[string]structure.Crewskills {
 
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithPath(buildPath(crewskills)),
 	)

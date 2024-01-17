@@ -13,7 +13,7 @@ type vehicleProfileResponse struct {
 }
 
 func VehicleCharacteristics(tank_id string, opts ...wgapi.ParamOption) structure.Vehicleprofile {
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithParam("tank_id", tank_id),
 		wgapi.WithPath(buildPath(vehicleprofile)),

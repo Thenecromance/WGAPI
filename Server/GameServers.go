@@ -19,12 +19,12 @@ type achievementsResponse struct {
 
 func GameServers(opts ...wgapi.ParamOption) map[string][]ServerStatus {
 
-	wgapi.InsertBefore(opts,
+	/*opts =*/ wgapi.InsertBefore(&opts,
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithPath(buildPath(info)),
 	)
 	request, err := wgapi.Request(opts...)
-	
+
 	if err != nil {
 		fmt.Println(err)
 		wgapi.Logger.Error(err)

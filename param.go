@@ -39,7 +39,7 @@ func (fp *FuncParam) apply(po *paramOption) {
 	fp.F(po)
 }
 
-func NewParam(ops ...ParamOption) (param *Param) {
+func newParam(ops ...ParamOption) (param *Param) {
 	ret := &Param{
 		popts: defaultParamOption(),
 	}
@@ -74,6 +74,6 @@ func WithParam(key string, value string) ParamOption {
 	}
 }
 
-func InsertBefore(orig []ParamOption, opts ...ParamOption) {
-	orig = append(opts, orig...)
+func InsertBefore(orig *[]ParamOption, opts ...ParamOption) /*[]ParamOption*/ {
+	*orig = append(opts, *orig...)
 }

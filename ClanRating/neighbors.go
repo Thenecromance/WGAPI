@@ -12,7 +12,7 @@ type neighborsResponse struct {
 }
 
 func Neighbors(clanId string, rankField string, opts ...wgapi.ParamOption) []ClanRating {
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("clan_id", clanId),
 		wgapi.WithParam("rank_field", rankField),
 		wgapi.WithParam("language", "zh-cn"),

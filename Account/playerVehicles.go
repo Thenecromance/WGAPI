@@ -28,7 +28,7 @@ type playerVehiclesResponse struct {
 
 func /* (this *Service) */ PlayerVehicles(accountIds string, opts ...wgapi.ParamOption) []PlayerDetail {
 
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("account_id", accountIds),
 		wgapi.WithPath(buildPath(vehicles)),
 	)

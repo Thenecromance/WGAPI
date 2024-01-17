@@ -18,7 +18,7 @@ type informationResponse struct {
 
 func Information(opts ...wgapi.ParamOption) structure.Info {
 
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithPath(buildPath(info)),
 	)

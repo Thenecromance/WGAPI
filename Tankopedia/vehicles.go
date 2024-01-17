@@ -16,7 +16,7 @@ type vehiclesResponse struct {
 // TODO: something goes wrong here , seems like parse failed
 func Vehicles(tank_id string, opts ...wgapi.ParamOption) structure.Vehicles {
 
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("tank_id", tank_id),
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithPath(buildPath(vehicles)),

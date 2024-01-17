@@ -15,14 +15,14 @@ func ActiveClanReserves(access_token string, reserve_level string, reserve_type 
 
 	panic("Don't have time to implement this")
 
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("access_token", access_token),
 		wgapi.WithParam("reserve_level", reserve_level),
 		wgapi.WithParam("reserve_type", reserve_type),
 		wgapi.WithPath(buildPath(activateclanreserve)),
 	)
 	request, err := wgapi.Request(opts...)
-	
+
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return ""

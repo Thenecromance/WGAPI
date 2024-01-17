@@ -14,7 +14,7 @@ type modulesResponse struct {
 
 func Modules(opts ...wgapi.ParamOption) map[string]structure.Modules {
 
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("extra", "default_profile"),
 		wgapi.WithParam("fields", "default_profile.engine"),
 		wgapi.WithParam("language", "zh-cn"),

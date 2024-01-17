@@ -15,7 +15,7 @@ type StatsRatingsResponse struct {
 
 func Stats(account_id string, opts ...wgapi.ParamOption) structure.Stats {
 
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("account_id", account_id),
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithPath(buildPath(stats)),

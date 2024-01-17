@@ -18,7 +18,7 @@ type responsePlayer struct {
 }
 
 func /*  (this *Service) */ Players(name string, opts ...wgapi.ParamOption) (ret []Player) {
-	wgapi.InsertBefore(opts, wgapi.WithParam("search", name), wgapi.WithPath(buildPath(players)))
+	wgapi.InsertBefore(&opts, wgapi.WithParam("search", name), wgapi.WithPath(buildPath(players)))
 
 	request, err := wgapi.Request(opts...)
 

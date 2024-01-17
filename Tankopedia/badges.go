@@ -13,7 +13,7 @@ type badgesResponse struct {
 }
 
 func Badges(opts ...wgapi.ParamOption) map[string]structure.Badges {
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithPath(buildPath(badges)),
 	)

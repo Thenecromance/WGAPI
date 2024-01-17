@@ -13,7 +13,7 @@ type clanGlossaryResponse struct {
 }
 
 func Glossary(opts ...wgapi.ParamOption) map[string]string {
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithPath(buildPath(glossary)),
 	)

@@ -19,7 +19,7 @@ type masteryResponse struct {
 
 func MasteryDatas(distribution string, percentile string, opts ...wgapi.ParamOption) structure.Mastery {
 
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("distribution", distribution),
 		wgapi.WithParam("percentile", percentile),
 		wgapi.WithParam("language", "zh-cn"),

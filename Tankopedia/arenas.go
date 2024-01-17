@@ -19,7 +19,7 @@ type mapResponse struct {
 }
 
 func Arenas(opts ...wgapi.ParamOption) map[string]Map {
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithPath(buildPath(arenas)),
 	)

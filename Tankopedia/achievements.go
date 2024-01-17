@@ -15,7 +15,7 @@ type achievementsResponse struct {
 }
 
 func Achievements(opts ...wgapi.ParamOption) map[string]structure.Achievements {
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithPath(buildPath(achievements)),
 	)

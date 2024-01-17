@@ -21,7 +21,7 @@ type vehicleprofilesResponse struct {
 }
 
 func VehicleProfiles(tank_id string, opts ...wgapi.ParamOption) map[string][]structure.Vehicleprofiles {
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithParam("tank_id", tank_id),
 		wgapi.WithPath(buildPath(vehicleprofiles)),

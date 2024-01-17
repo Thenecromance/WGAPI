@@ -42,13 +42,13 @@ type ClanDetailResponse struct {
 }
 
 func ClanDetail(clanId string, opts ...wgapi.ParamOption) map[string]structure.Clandetails {
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("clan_id", clanId),
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithPath(buildPath(clan_detail)),
 	)
 	request, err := wgapi.Request(opts...)
-	
+
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

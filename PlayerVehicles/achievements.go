@@ -16,7 +16,7 @@ type achivementResponse struct {
 }
 
 func Achievements(account_id string, opts ...wgapi.ParamOption) map[string][]structure.Achievements {
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("account_id", account_id),
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithPath(buildPath(achievements)),

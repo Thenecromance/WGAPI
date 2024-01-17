@@ -60,12 +60,12 @@ type personalmissionsResponse struct {
 }
 
 func PersonalMissions(opts ...wgapi.ParamOption) map[string]structure.Personalmissions {
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithPath(buildPath(personalmissions)),
 	)
 	request, err := wgapi.Request(opts...)
-	
+
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

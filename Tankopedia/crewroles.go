@@ -13,12 +13,12 @@ type crewrolesResponse struct {
 }
 
 func CrewRoles(opts ...wgapi.ParamOption) map[string]structure.Crewroles {
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithPath(buildPath(crewroles)),
 	)
 	request, err := wgapi.Request(opts...)
-	
+
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

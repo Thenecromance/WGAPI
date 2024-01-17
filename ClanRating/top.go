@@ -13,14 +13,14 @@ type topResponse struct {
 }
 
 func Top(rank_field string, opts ...wgapi.ParamOption) []structure.Top {
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("rank_field", rank_field),
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithParam("limit", "100"),
 		wgapi.WithPath(buildPath(top)),
 	)
 	request, err := wgapi.Request(opts...)
-	
+
 	if err != nil {
 		wgapi.Logger.Error(err)
 		return nil

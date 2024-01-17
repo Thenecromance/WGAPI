@@ -18,7 +18,7 @@ type boostersResponse struct {
 }
 
 func Boosters(opts ...wgapi.ParamOption) map[string]structure.Boosters {
-	wgapi.InsertBefore(opts,
+	wgapi.InsertBefore(&opts,
 		wgapi.WithParam("language", "zh-cn"),
 		wgapi.WithPath(buildPath(boosters)),
 	)
